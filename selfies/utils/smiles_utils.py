@@ -81,7 +81,7 @@ def tokenize_smiles(smiles: str) -> Iterator[SMILESToken]:
         if i == len(smiles):
             raise SMILESParserError(smiles, "hanging bond", i - 1)
 
-        elif smiles[i].isalpha():  # organic subset elements
+        elif smiles[i].isalpha() or smiles[i] == '*':  # organic subset elements or wildcard
             if smiles[i: i + 2] in ("Br", "Cl"):  # two-letter elements
                 token = SMILESToken(bond_idx, i, i + 2,
                                     SMILESTokenTypes.ATOM, smiles[i: i + 2])
