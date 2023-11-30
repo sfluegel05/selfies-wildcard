@@ -61,8 +61,9 @@ def encoder(smiles: str, strict: bool = True, attribute: bool = False) -> str:
         before translation.
     """
 
+    mol = smiles_to_mol(smiles, attributable=attribute) # get error message for SMILESParserError directly
     try:
-        mol = smiles_to_mol(smiles, attributable=attribute)
+        pass
     except SMILESParserError as err:
         err_msg = "failed to parse input\n\tSMILES: {}".format(smiles)
         raise EncoderError(err_msg) from err
